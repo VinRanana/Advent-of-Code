@@ -1,4 +1,4 @@
-// import module
+const Report = require('./expense_report.js');
 
 function convertReportToArray (expenseReport) {
 
@@ -11,3 +11,5 @@ function findTwoEntries (reportArr) { // find the two entries that add up to 202
 function multiplyEntries (entriesArr) {
 
 }
+
+console.log(Report);

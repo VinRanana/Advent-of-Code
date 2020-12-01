@@ -1,4 +1,6 @@
-const reportData = `1706
+const Report = {};
+
+Report.data = `1706
 1466
 1427
 1744
@@ -197,4 +199,6 @@ const reportData = `1706
 1235
 1510
 1500
-1485`
+1485`;
+
+module.exports = Report;
