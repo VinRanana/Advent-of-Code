@@ -1,0 +1,13 @@
+// import module
+
+function convertReportToArray (expenseReport) {
+
+}
+
+function findTwoEntries (reportArr) { // find the two entries that add up to 2020
+
+}
+
+function multiplyEntries (entriesArr) {
+
+}
