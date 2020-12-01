@@ -1,15 +1,32 @@
 const Report = require('./expense_report.js');
 
 function convertReportToArray (expenseReport) {
+  return expenseReport.split('\n');
+}
+
+function convertArrElementsToNums (reportArray) {
+  return reportArray.map(element => +element);
+}
+
+function findTwoEntries (numberArray) { // find the two entries that add up to 2020
+  let arrayLength = numberArray.length;
+
+  for (let i = 0; i < arrayLength; i++) {
+    const firstNumber = numberArray[i]
+    const secondNumber = 2020 - firstNumber;
+
+    for (let j = i + 1; j < arrayLength; j++) {
+      if (numberArray[j] === secondNumber) return [firstNumber, secondNumber];
+    }
+  }
+}
+
+function multiplyEntries (a, b) {
 
 }
 
-function findTwoEntries (reportArr) { // find the two entries that add up to 2020
+let result = convertReportToArray(Report.data);
+result = convertArrElementsToNums(result);
+result = findTwoEntries(result);
 
-}
-
-function multiplyEntries (entriesArr) {
-
-}
-
-console.log(Report);
+console.log( result );
