@@ -21,12 +21,13 @@ function findTwoEntries (numberArray) { // find the two entries that add up to 2
   }
 }
 
-function multiplyEntries (a, b) {
-
+function multiply ([a, b]) {
+  return a * b;
 }
 
 let result = convertReportToArray(Report.data);
 result = convertArrElementsToNums(result);
 result = findTwoEntries(result);
+result = multiply(result);
 
 console.log( result );
