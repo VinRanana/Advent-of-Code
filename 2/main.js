@@ -5,11 +5,10 @@ function convertPasswordsToArray (string) {
 }
 
 function convertElementsToObjects(array) {
-  return array.forEach(element => {
-
+  return array.map(element => {
     // regex to go here
-
-    element = {min, max, character, password}
+    const min = element.match(/\d{1,2}/)[0];
+    return {min};
   });
 }
 
