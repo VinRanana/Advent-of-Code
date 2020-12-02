@@ -16,23 +16,22 @@ function convertElementsToObjects (array) {
   });
 }
 
-// function countLetters (array) {
-//   return array.reduce((total, element) => {
-//     let count = 0;
+function countLetters (array) {
+  return array.reduce((total, element) => {
+    let count = 0;
 
-//     for (let i = 0; i < element.password.length; i++) {
-//       if (element.password[i] == element.letter) count++;
-//     }
+    for (let i = 0; i < element.password.length; i++) {
+      if (element.password[i] == element.letter) count++;
+    }
 
-//     console.log([element.min, element.max, element.letter, element.password, count]);
-//     console.log(total);
-//     if (count >= element.min && count <= element.max) total++;
-//     console.log(total);
-//   }, 0)
-// }
+    if (count >= element.min && count <= element.max) total++;
+
+    return total;
+  }, 0)
+}
 
 let result = convertPasswordsToArray(Passwords.data);
 result = convertElementsToObjects(result);
-// result = countLetters(result);
+result = countLetters(result);
 
 console.log( result );
