@@ -8,7 +8,11 @@ function convertElementsToObjects(array) {
   return array.map(element => {
     // regex to go here
     const min = element.match(/\d{1,2}/)[0];
-    return {min};
+    const max = element.match(/\d{1,2}/g)[1];
+    const character = element.match(/\s([a-z])/)[0];
+    const password = element.match(/\s([a-z]+)/g)[1];
+
+    return {min, max, character, password};
   });
 }
 
