@@ -1,12 +1,10 @@
 const SlopeMap = require('./slope_map.js');
-const right = 3;
-const down = 1;
 
 function makeSlopeArray (str) {
   return str.split('\n');
 }
 
-function locationIsATreeBool (arr, index) {
+function locationIsATreeBool (arr, index, right, down) {
   const str = arr[index];
 
   let position = right * ( index / down ) + 1;
@@ -16,18 +14,38 @@ function locationIsATreeBool (arr, index) {
   return ( str[position - 1] === '#' );
 }
 
-function howManyTrees (arr) {
+function howManyTrees (arr, right, down) {
   let numOfTrees = 0;
 
-  for (let i = 1; i < arr.length; i++) {
-    if ( locationIsATreeBool(arr, i) ) numOfTrees++;
+  for (let i = 1; i < arr.length; i = i + down) {
+    if ( locationIsATreeBool(arr, i, right, down) ) numOfTrees++;
   }
 
   return numOfTrees;
 }
 
+function multiply () {
+  let product = 1;
 
-let result = makeSlopeArray(SlopeMap.data);
-result = howManyTrees(result);
+  for (const arg in arguments) {
+    if (arguments.hasOwnProperty(arg)) {
+      product *= arguments[arg];
+    }
+  }
 
-console.log(result);
+  return product;
+}
+
+
+const slopeArray = makeSlopeArray(SlopeMap.data);
+const slopeRoutes = [
+  howManyTrees(slopeArray, 1, 1),
+  howManyTrees(slopeArray, 3, 1),
+  howManyTrees(slopeArray, 5, 1),
+  howManyTrees(slopeArray, 7, 1),
+  howManyTrees(slopeArray, 1, 2),
+];
+const result = multiply(...slopeRoutes);
+
+
+console.log(slopeRoutes);
