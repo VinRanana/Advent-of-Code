@@ -1,0 +1,1 @@
+const SlopeMap = require('./slope_map.js');
