@@ -9,19 +9,18 @@ function makeSlopeArray (str) {
 function locationIsATreeBool (arr, index) {
   const str = arr[index];
 
-  let position = right * ( index / down );
-  position = position % str.length;
+  let position = right * ( index / down ) + 1;
+  position = (position % str.length);
+  if (position === 0) position = str.length; 
   
-  let isTree = ( str[position - 1] === '#' );
- 
-  return isTree;
+  return ( str[position - 1] === '#' );
 }
 
 function howManyTrees (arr) {
   let numOfTrees = 0;
 
   for (let i = 1; i < arr.length; i++) {
-    if ( locationIsATreeBool(arr, i) ) trees++;
+    if ( locationIsATreeBool(arr, i) ) numOfTrees++;
   }
 
   return numOfTrees;
