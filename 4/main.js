@@ -2,11 +2,13 @@ const BatchFile = require('./batch-file.js');
 const requiredFields = 
   ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid'];
 
+  
 
-let batchArray = makeArrFromStr(BatchFile.data);
+const batchArray = makeArrFromStr(BatchFile.data);
 numOfValidPassports = countValidPassports(batchArray);
 
 console.log(numOfValidPassports);
+
 
 
 function makeArrFromStr (str) {
@@ -15,8 +17,7 @@ function makeArrFromStr (str) {
 
 function countValidPassports (arr) {
   const reducer = (acc, cur) => {
-    if (isPassportValidBool(cur)) return acc + 1;
-    else return acc;
+    return isPassportValidBool(cur) ? acc + 1 : acc;
   };
 
   return arr.reduce(reducer, 0);
@@ -24,21 +25,17 @@ function countValidPassports (arr) {
 
 function isPassportValidBool (passport) {
   const reducer = (acc, cur) => {
-    if (checkFieldInBatch(cur, passport)) {
-      return acc + 1;
-    }
+    if (checkFieldInBatch(cur, passport)) return acc + 1;
     else return acc;
   };
 
   const numOfReqFields = requiredFields.reduce(reducer, 0);
 
-  if (numOfReqFields === requiredFields.length) return true;
-  else return false
+  return numOfReqFields === requiredFields.length ? true : false;
 }
 
 function checkFieldInBatch (field, batch) {
-  let fieldRegex = new RegExp(`\s${field}:`);
+  const fieldRegex = new RegExp(field + ':');
 
-  if (fieldRegex.test(batch)) return true;
-  else return false;
+  return fieldRegex.test(batch) ? true : false;
 }
