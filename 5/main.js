@@ -48,7 +48,7 @@ function convertBinaryToNum (num, order, total) {
   num = Math.floor(num / 10);
   order++;
   
-  convertBinaryToNum(num, order, total);
+  return convertBinaryToNum(num, order, total);
 }
 
 console.log(seatId);
