@@ -22,7 +22,7 @@ function singlePassToBinary (str) {
 
   for (let i = 0; i < 10; i++) {
     const letter = str[i];
-    if (letter === 'F' || letter === 'L') result += '1';
+    if (letter === 'B' || letter === 'R') result += '1';
     else result += '0';
   }
 
