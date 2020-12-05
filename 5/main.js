@@ -11,7 +11,7 @@ const binaryNumArray = strArrToNumberArr(binaryArray);
 
 const highestBinary = findHighestBinary(binaryNumArray);
 
-const seatId = 
+const seatId = convertBinaryToNum(highestBinary, 0, 0);
 
 function boardingPassesToBinary (arr) {
   return arr.map( element => singlePassToBinary(element) );
@@ -40,8 +40,15 @@ function findHighestBinary (arr) {
   });
 }
 
-function convertBinaryToNum (binaryNum) {
+function convertBinaryToNum (num, order, total) {
+  if (!num) return total;
+
+  if (num % 10) total += 2 ** order;
+
+  num = Math.floor(num / 10);
+  order++;
   
+  convertBinaryToNum(num, order, total);
 }
 
-console.log(highestBinary);
+console.log(seatId);
