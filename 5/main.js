@@ -1,5 +1,7 @@
 const BoardingPasses = require('./boarding-passes.js');
 
+
+
 // Split into array of individual passes.
 const boardingPassesArray = BoardingPasses.data.split('\n')
 
@@ -8,10 +10,12 @@ const binaryArray = boardingPassesToBinary(boardingPassesArray);
 
 // Determine highest binary number
 const binaryNumArray = strArrToNumberArr(binaryArray);
-
 const highestBinary = findHighestBinary(binaryNumArray);
-
 const seatId = convertBinaryToNum(highestBinary, 0, 0);
+
+console.log(seatId);
+
+
 
 function boardingPassesToBinary (arr) {
   return arr.map( element => singlePassToBinary(element) );
@@ -34,21 +38,14 @@ function strArrToNumberArr (arr) {
 }
 
 function findHighestBinary (arr) {
-  return arr.reduce((acc, cur) => {
-    if (cur > acc) return cur;
-    else return acc;
-  });
+  return arr.reduce((acc, cur) => cur > acc ? cur : acc);
 }
 
 function convertBinaryToNum (num, order, total) {
-  if (!num) return total;
-
   if (num % 10) total += 2 ** order;
 
   num = Math.floor(num / 10);
   order++;
   
-  return convertBinaryToNum(num, order, total);
+  return num ? convertBinaryToNum(num, order, total) : total;
 }
-
-console.log(seatId);
