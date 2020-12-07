@@ -24,15 +24,33 @@ const myBag = 'shiny gold'
 let containerBags = []; 
 let checkedBags = [];
 
-for (const container in allBags) {
-  if (allBags.hasOwnProperty(container)) {
-    const containedArr = allBags[container];
-    if ( containedArr.includes(myBag) ) containerBags.push(`${container}`);
+function findContainers (innerBag) {
+  for (const containerBag in allBags) {
+    if (allBags.hasOwnProperty(containerBag)) {
+      const contentsArr = allBags[containerBag];
+      if ( contentsArr.includes(innerBag) && !checkedBags.includes(innerBag) ) {
+        containerBags.push(`${containerBag}`)
+      };
+    }
   }
 }
-
-console.log(containerBags);
+findContainers(myBag);
 
 // Each bag that contains any bag in containerBags is pushed to containerBags,
 // and the bag contained is removed and pushed to checkedBags.
 // Use recursion to complete process and find all bags.
+function recursiveFindContainers () {
+  if (!checkedBags[0]) return;
+
+  const bag = containerBags[0];
+
+  if ( !checkedBags.includes(bag) ) checkedBags.push(bag);
+  findContainers(bag);
+  containerBags.shift();
+
+  recursiveFindContainers();
+}
+recursiveFindContainers();
+
+
+console.log(containerBags, checkedBags);
