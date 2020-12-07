@@ -11,21 +11,28 @@ const allBags = {};
 rulesArray.forEach(element => {
   const containerRegex = /^([a-z]+\s[a-z]+)\sbags/;
   const containedRegex = /([a-z]+\s[a-z]+)\sbags?[\.\,]/g;
-
   const contained = [];
 
   [ ...element.matchAll(containedRegex) ]
       .forEach(bag => contained.push(bag[1]));
 
   allBags[ element.match(containerRegex)[1] ] = contained;
-
 });
 
-console.log(allBags);
+// Each bag that contains shiny gold is pushed to containerBags.
+const myBag = 'shiny gold'
+let containerBags = []; 
+let checkedBags = [];
 
+for (const container in allBags) {
+  if (allBags.hasOwnProperty(container)) {
+    const containedArr = allBags[container];
+    if ( containedArr.includes(myBag) ) containerBags.push(`${container}`);
+  }
+}
 
-// Let correctBags = [], finishedBags = [];
-// Each bag that contains shiny gold is pushed to correctBags.
-// Each bag that contains any bag in correctBags is pushed to correctBags,
-// and the bag contained is removed and pushed to finishedBags.
+console.log(containerBags);
+
+// Each bag that contains any bag in containerBags is pushed to containerBags,
+// and the bag contained is removed and pushed to checkedBags.
 // Use recursion to complete process and find all bags.
