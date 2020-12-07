@@ -39,18 +39,17 @@ findContainers(myBag);
 // Each bag that contains any bag in containerBags is pushed to containerBags,
 // and the bag contained is removed and pushed to checkedBags.
 // Use recursion to complete process and find all bags.
-function recursiveFindContainers () {
-  if (!checkedBags[0]) return;
-
+while (containerBags.length > 0) {
   const bag = containerBags[0];
 
-  if ( !checkedBags.includes(bag) ) checkedBags.push(bag);
-  findContainers(bag);
+  if ( !checkedBags.includes(bag) ) {
+    findContainers(bag);
+    checkedBags.push(bag);
+  }
+
   containerBags.shift();
-
-  recursiveFindContainers();
 }
-recursiveFindContainers();
 
+result = checkedBags.length;
 
-console.log(containerBags, checkedBags);
+console.log(result);
