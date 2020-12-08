@@ -10,9 +10,9 @@ const binaryArray = boardingPassesToBinary(boardingPassesArray);
 
 // Determine highest binary number
 const highestBinary = findHighestBinary(binaryArray);
-const seatId = convertBinaryToNum(highestBinary, 0, 0);
 
 // Log the result
+const seatId = convertBinaryToNum(highestBinary, 0, 0);
 console.log(seatId);
 
 
@@ -40,7 +40,7 @@ function findHighestBinary (arr) {
 function convertBinaryToNum (num, order, total) {
   if (num % 10) total += 2 ** order;
 
-  num = Math.floor(num / 10);
+  num = Math.trunc(num / 10);
   order++;
   
   return num ? convertBinaryToNum(num, order, total) : total;
