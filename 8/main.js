@@ -1,4 +1,5 @@
 const BootCode = require('./boot-code.js');
+
 const bootCodeArray = BootCode.data
   .split('\n')
   .map(element => {
@@ -9,9 +10,25 @@ const bootCodeArray = BootCode.data
     obj.argument = Number(arr[1]);
 
     return obj
-  })
+  });
 
 let accumulator = 0;
 let linesExecuted = [];
+let index = 0
 
-console.log(bootCodeArray);
+while (!linesExecuted.includes(index)) {
+  executeInstruction(
+    bootCodeArray[index].operation, 
+    bootCodeArray[index].argument);
+};
+
+
+function executeInstruction (operation, argument) {
+  linesExecuted.push(index);
+  index++;
+
+  if (operation === 'acc') accumulator += argument;
+  if (operation === 'jmp') index += argument;
+}
+
+console.log(accumulator);
