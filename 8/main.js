@@ -16,11 +16,17 @@ let accumulator = 0;
 let linesExecuted = [];
 let index = 0
 
+
+
 while (!linesExecuted.includes(index)) {
   executeInstruction(
     bootCodeArray[index].operation, 
-    bootCodeArray[index].argument);
-};
+    bootCodeArray[index].argument
+  );
+}
+
+console.log(accumulator);
+
 
 
 function executeInstruction (operation, argument) {
@@ -28,7 +34,5 @@ function executeInstruction (operation, argument) {
   index++;
 
   if (operation === 'acc') accumulator += argument;
-  if (operation === 'jmp') index += argument;
+  if (operation === 'jmp') index += argument - 1;
 }
-
-console.log(accumulator);
