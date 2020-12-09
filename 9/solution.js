@@ -1,17 +1,33 @@
 const Numbers = require('./input.js');
 
-let availableNums = Numbers.data
+const availableNums = Numbers.data
   .split('\n')
   .slice(0, 25)
   .map( el => Number(el) );
 
+const numList = Numbers.data
+  .split('\n')
+  .slice(25)
+  .map( el => Number(el) );
 
-console.log(availableNums);
 
+
+for (let i = 0; i < numList.length; i++) {
+  const currentNum = numList[i];
+  
+  if (isNumValid(currentNum)) {
+    availableNums.shift();
+    availableNums.push(currentNum);
+  } else {
+    console.log(currentNum);
+    break;
+  }
+}
+  
 
 
 function isNumValid (num) {
-  let checkedNums = [];
+  const checkedNums = [];
 
   for (const el of availableNums) {
     const difference = num - el;
