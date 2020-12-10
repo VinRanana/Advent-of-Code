@@ -1,4 +1,4 @@
-const AdaptersString = require('./input.js');
+const AdaptersString = require ('./input.js');
 
 const adaptersArray = AdaptersString.data
   .split('\n')
@@ -15,7 +15,7 @@ let joltDifferences = {
 
 joltDifferences = countDifferences(joltDifferences, adaptersArray);
 
-result = multiplyDifferences(joltDifferences, [1, 3]);
+const result = multiplyDifferences(joltDifferences, [1, 3]);
 
 console.log(result);
 
