@@ -1,42 +1,64 @@
 const SeatLayoutObj = require('./test-input');
 
+const rowLength = 10;
+
 const emptiedLayout = SeatLayoutObj.data
   .split('\n')
   .map( el => el.split('') );
 
-const occupiedLayout = emptiedLayout.map(el => el);
+const occupiedLayout = JSON.parse(JSON.stringify(emptiedLayout));
 
 
 
-occupyRow(emptiedLayout, 1);
+occupyArea(emptiedLayout);
 
 console.log(occupiedLayout);
 
 
 
-function occupyRow (outerArr, rowIndex) {
-  outerArr[rowIndex].forEach((seat, i, arr) => {
-    if (seat === 'L') {
-      const numOfSeatsOccupied = checkAdjacentSeats(emptiedLayout, rowIndex, i);
+function occupyArea (emptiedArr) {
+  emptiedArr.forEach((rowValue, rowIndex) => {
+    occupyRow(emptiedArr, rowIndex);
+  });
+}
 
-      if (numOfSeatsOccupied === 0) occupiedLayout[rowIndex][i] = '#';
+function occupyRow (emptiedArr, rowIndex) {
+  emptiedArr[rowIndex].forEach((seatValue, seatIndex) => {
+    if (seatValue === 'L') {
+      const numOfSeatsOccupied = checkAdjacentSeats(emptiedLayout, rowIndex, seatIndex);
+
+      if (numOfSeatsOccupied === 0) occupiedLayout[rowIndex][seatIndex] = '#';
     }
   })
 }
 
-function checkAdjacentSeats(seatingLayout, rowIndex, i) {
+function checkAdjacentSeats(seatingLayout, rowIndex, seatIndex) {
   const adjacentSeats = [];
+  if (rowIndex > 0) {
+    if (seatIndex > 0)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, seatIndex - 1));}
 
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, i - 1));
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, i + 0));
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, i + 1));
+    adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, seatIndex + 0));
 
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 0, i - 1));
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 0, i + 1));
+    if (seatIndex <= rowLength)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex - 1, seatIndex + 1));}
+  }
 
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, i - 1));
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, i + 0));
-  adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, i + 1));
+    if (seatIndex > 0)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 0, seatIndex - 1));}
+
+    if (seatIndex <= rowLength)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 0, seatIndex + 1));}
+
+  if (rowIndex < seatingLayout.length - 1) {
+    if (seatIndex > 0)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, seatIndex - 1));}
+
+    adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, seatIndex + 0));
+
+    if (seatIndex <= rowLength)
+      {adjacentSeats.push(isSeatOccupied(seatingLayout, rowIndex + 1, seatIndex + 1));}
+  }
 
   numOfSeatsOccupied = adjacentSeats.reduce((acc, cur) => {
     return cur ? acc + 1 : acc;
@@ -46,7 +68,9 @@ function checkAdjacentSeats(seatingLayout, rowIndex, i) {
 }
 
 function isSeatOccupied (seatingLayout, rowIndex, seatIndex) {
-  if (seatingLayout[rowIndex][seatIndex] === '#') return true;
+  const seat = seatingLayout[rowIndex][seatIndex];
+
+  if (seat === '#') return true;
   else return false;
 }
 
