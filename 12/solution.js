@@ -16,7 +16,7 @@ let ferryState = {
 
 
 
-for (const instruction of instructions) {
+for (let instruction of instructions) {
   ferryState = executeInstruction(ferryState, instruction);
 }
 
@@ -32,7 +32,7 @@ function executeInstruction (ferryState, instruction) {
     ferryState = moveForwards(ferryState, instruction);
   }
 
-  if (instruction.action === 'R' || instruction.action === 'R') {
+  if (instruction.action === 'R' || instruction.action === 'L') {
     ferryState.direction = changeDirection(ferryState, instruction);
   }
   
@@ -42,30 +42,26 @@ function executeInstruction (ferryState, instruction) {
 }
 
 function reposition ({north, east, direction}, {action, value}) {
-  const newState = {north, east, direction};
+  if (action === 'N') north += value;
+  if (action === 'E') east += value;
+  if (action === 'S') north -= value;
+  if (action === 'W') east -= value;
 
-  if (action === 'N') newState.north = north + value;
-  if (action === 'E') newState.east = east + value;
-  if (action === 'S') newState.north = north - value;
-  if (action === 'W') newState.east = east - value;
-
-  return newState;
+  return {north, east, direction};
 }
 
 function moveForwards ({north, east, direction}, {value}) {
-  const newState = {north, east, direction};
+  if (direction === 0) north += value;
+  if (direction === 90) east += value;
+  if (direction === 180) north -= value;
+  if (direction === 270) east -= value;
 
-  if (direction === 0) newState.north = north + value;
-  if (direction === 90) newState.east = east + value;
-  if (direction === 180) newState.north = north - value;
-  if (direction === 270) newState.east = east - value;
-
-  return newState;
+  return {north, east, direction};
 }
 
 function changeDirection ({direction}, {action, value}) {
-  if (action === 'R') direction += value;
-  else direction += (360 - value);
+  if (action === 'L') direction += (360 - value);
+  else if (action === 'R') direction += value;
 
   return direction % 360;
 }
