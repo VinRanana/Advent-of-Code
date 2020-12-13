@@ -1,0 +1,2 @@
+const BusNotesData = require('./input');
+
