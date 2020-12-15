@@ -4,7 +4,7 @@ const input = [15,5,1,4,7,0];
 
 
 
-let result = playGame(input, 30000000);
+let result = playGame(input, 3000000);
 
 console.log( result );
 
@@ -15,7 +15,7 @@ function playGame (input, end) {
   const endMinusOne = end - 1;
 
   while ( input.length < endMinusOne ) {
-    input.push( nextNumber(input) );
+    input[input.length] = nextNumber(input);
   }
 
   return nextNumber(input);
