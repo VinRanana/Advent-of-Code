@@ -1,16 +1,20 @@
 
-const input = [15, 5, 1, 4, 7, 0];
+const input = [15,5,1,4,7,0];
 
 
 
 
-console.log( playGame(input, 2020) );
+let result = playGame(input, 30000000);
+
+console.log( result );
 
 
 
 
 function playGame (input, end) {
-  while ( input.length < (end - 1) ) {
+  const endMinusOne = end - 1;
+
+  while ( input.length < endMinusOne ) {
     input.push( nextNumber(input) );
   }
 
