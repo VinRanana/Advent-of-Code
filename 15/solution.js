@@ -20,16 +20,15 @@ function playGame (inputMap, end) {
   let spoken = 6;
   let lastNum = 0;
 
-  if ( !inputMap.has(lastNum) ) inputMap.set(lastNum, spoken);
-
   while ( spoken < end ) {
-    let newNum = spoken - inputMap.get(lastNum);
+    if ( !inputMap.has(lastNum) ) inputMap.set(lastNum, spoken);
+
+    const newNum = spoken - inputMap.get(lastNum);
     
     inputMap.set(lastNum, spoken);
+
     lastNum = newNum.valueOf();
     spoken++;
-
-    if ( !inputMap.has(lastNum) ) inputMap.set(lastNum, spoken);
   }
 
   return lastNum;
