@@ -1,4 +1,4 @@
-## --- Day 15: Rambunctious Recitation ---
+## -- Day 15: Rambunctious Recitation ---
 
 You catch the airport shuttle and try to book a new flight to your vacation island. Due to the storm, all direct flights have been cancelled, but a route is available to get around the storm. You take it.
 
@@ -41,8 +41,6 @@ Given your starting numbers, *what will be the `2020`th number spoken?*
 
 Your puzzle answer was `1259`.
 
-The first half of this puzzle is complete! It provides one gold star: *
-
 ## --- Part Two ---
 
 Impressed, the Elves issue you a challenge: determine the `30000000`th number spoken. For example, given the same starting numbers as above:
@@ -56,3 +54,7 @@ Impressed, the Elves issue you a challenge: determine the `30000000`th number sp
 - Given `3,1,2`, the `30000000`th number spoken is `362`.
 
 Given your starting numbers, *what will be the `30000000`th number spoken?*
+
+Your puzzle answer was `689`.
+
+Both parts of this puzzle are complete! They provide two gold stars: **

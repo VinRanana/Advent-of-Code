@@ -1,42 +1,35 @@
 
-const input = {
-  15: 1, 
-  5: 2,
-  1: 3,
-  4: 4,
-  7: 5 
-};
+const inputMap = new Map();
+
+inputMap.set(15, 1);
+inputMap.set(5, 2);
+inputMap.set(1, 3);
+inputMap.set(4, 4);
+inputMap.set(7, 5);
 
 
 
 
-let result = playGame(input, 30000000);
-
-console.log( result );
-// 6x faster than first solution, but still 10x too slow
-// Replace obj with map
+let result = playGame(inputMap, 30000000);
+console.log(result);
 
 
 
 
-function playGame (input, end) {
+function playGame (inputMap, end) {
   let spoken = 6;
   let lastNum = 0;
 
-  if ( !input.hasOwnProperty(`${lastNum}`) ) {
-    input[`${lastNum}`] = spoken;
-  }
+  if ( !inputMap.has(lastNum) ) inputMap.set(lastNum, spoken);
 
   while ( spoken < end ) {
-    let newNum = spoken - input[`${lastNum}`];
+    let newNum = spoken - inputMap.get(lastNum);
     
-    input[`${lastNum}`] = spoken;
-    lastNum = JSON.parse( JSON.stringify(newNum) );
+    inputMap.set(lastNum, spoken);
+    lastNum = newNum.valueOf();
     spoken++;
 
-    if ( !input.hasOwnProperty(`${lastNum}`) ) {
-      input[`${lastNum}`] = spoken;
-    }
+    if ( !inputMap.has(lastNum) ) inputMap.set(lastNum, spoken);
   }
 
   return lastNum;
