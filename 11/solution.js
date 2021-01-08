@@ -13,13 +13,13 @@ let numOccupiedAfter = 0;
 
 
 
-
-console.log(numOccupiedBefore);
+console.log(emptiedLayout);
+// console.log(numOccupiedBefore);
 
 do {
   numOccupiedBefore = numOccupiedAfter;
   numOccupiedAfter = ( oneRound() );
-  console.log(numOccupiedAfter);
+  // console.log(numOccupiedAfter);
 } while (numOccupiedAfter != numOccupiedBefore);
 
 
